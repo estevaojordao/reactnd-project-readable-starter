@@ -1,21 +1,54 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Link, Route, Switch, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { loadCategoriesFetch } from "./actions/categories";
+import Header from "./components/header";
+import PostsView from "./components/posts-view";
+import PostView from "./components/post-view";
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.loadCategories()
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header/>
+        {this.props.categories && Object.values(this.props.categories).map((cat) => {
+          return <Link key={cat.path} to={cat.path !== null ? `/category/${cat.path}` : '/'}
+                       className="item">{cat.name}</Link>
+        })}
+        <div className="main container ui basic segment">
+          <Switch>
+            <Route exact path="/category/:category" render={(props) => (
+              <PostsView category={props.match.params.category}/>
+            )}/>
+            <Route exact path="/" render={(props) => (
+              <PostsView category={undefined}/>)
+            }/>
+            <Route exact path="/:categoryId/:postId" render={(props) => (
+              <PostView categoryId={props.match.params.categoryId} postId={props.match.params.postId}/>
+            )}/>
+          </Switch>
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps({categories}) {
+  return {
+    categories
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadCategories: loadCategoriesFetch(dispatch)
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
