@@ -9,7 +9,7 @@ import PostForm from './post-form';
 
 class PostPreview extends Component {
 
-  // noinspection JSUnusedGlobalSymbols
+
   static propTypes = {
     post: PropTypes.object.isRequired
   };

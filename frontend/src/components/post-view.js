@@ -11,7 +11,7 @@ import { withRouter } from "react-router-dom";
 
 class PostView extends Component {
 
-  // noinspection JSUnusedGlobalSymbols
+
   static propTypes = {
     postId: PropTypes.string.isRequired,
     categoryId: PropTypes.string.isRequired
@@ -81,7 +81,7 @@ class PostView extends Component {
           <PostComments postId={post.id} className="ui segment"/>
         </div>
 
-        {/* MODAL FOR EDIT OF POST */}
+        {}
 
         <Modal
           isOpen={this.state.editPost}

@@ -13,8 +13,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "semantic-ui-css": "^2.2.12",
-    "react-scripts": "1.0.17",
-    "react-validation":"3.0.7"
+    "react-scripts": "1.0.17"
   },
   "scripts": {
     "start": "react-scripts start",

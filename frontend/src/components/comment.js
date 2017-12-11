@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 
 class PostComment extends Component {
 
-  // noinspection JSUnusedGlobalSymbols
   static propTypes = {
     comment: PropTypes.object.isRequired,
     deleteComment: PropTypes.func.isRequired
@@ -64,7 +63,7 @@ class PostComment extends Component {
           </div>
         </div>
 
-        {/* EDIT COMMENT MODAL */}
+        {}
 
         <Modal
           isOpen={this.state.editCommentOpen}

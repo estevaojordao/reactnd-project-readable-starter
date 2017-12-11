@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 class PostForm extends Component {
 
-  // noinspection JSUnusedGlobalSymbols
+  
   static propTypes = {
     submit: PropTypes.func.isRequired,
     cancel: PropTypes.func.isRequired,
