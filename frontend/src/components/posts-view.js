@@ -41,7 +41,7 @@ class PostsView extends Component {
           })}
         </div>}
         {(!postsArray || postsArray.length === 0) &&
-        <p>There are not posts - the potential is huge. Make yourself heard.</p>
+        <p>There are not posts :(</p>
         }
         <br />
         <button className="ui green labeled submit icon button" onClick={this.openPostModal}>

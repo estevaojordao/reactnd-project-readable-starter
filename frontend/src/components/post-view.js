@@ -30,8 +30,7 @@ class PostView extends Component {
     this.props.history.push('/');
   };
 
-  submitUpdate = (data) => {
-    console.log('submit with data', data);
+  submitUpdate = (data) => {    
     this.props.update(this.props.postId, data.title, data.body);
     this.setState({editPost: false});
   };
@@ -46,11 +45,32 @@ class PostView extends Component {
     });
   };
 
+  handleCancel = () => {
+    this.setState({editPost: false});
+    this.props.history.push('/');
+  };
+  handleRedirect = () => {
+    
+    this.props.history.push('');
+  };
+
   render() {
     const post = this.props.posts[this.props.postId];
-    if (!post) {
+    
+    if (!post) {      
       return null;
     }
+    
+    if(typeof(post.deleted) === "undefined" || post.deleted){
+      return (<div className="ui negative message">
+                
+                <div className="header">
+                  This post is no longer with us !! 
+                </div>
+              <p>RIP :(</p>
+              </div>);
+    }
+    
     const loading = this.props.loading[LOADING_CATEGORY_ENUM.POST] && this.props.loading[LOADING_CATEGORY_ENUM.POST][this.props.postId];
     return (<article className="ui raised segment">
       <div className={"ui " + (loading ? "active loader" : "")}>
@@ -70,6 +90,9 @@ class PostView extends Component {
             <button className="ui blue basic button" onClick={this.showEdit}><i className="edit icon"/>Edit</button>
             <button className="ui red basic button" onClick={this.handleDelete}>
               <i className="trash outline icon"/>Delete
+            </button>
+            <button className="ui red basic button" onClick={this.handleCancel}>
+              <i className="trash outline icon"/>Cancel
             </button>
           </div>
           <br/>
